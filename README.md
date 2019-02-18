@@ -3,7 +3,7 @@
 01. Após ter feito download do repositório é necessário entrar no diretório do projeto;
 cd ~/Download/creditlimit-ui
 00. Construir a imagem do  creditlimit-ui (frontend)
-docker build -t creditlimit-ui . --network=bridge
+docker build -t creditlimit-ui .
 00. Para conferir se o mesmo foi criado executar o comando abaixo:
 $ docker image ls
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
@@ -13,4 +13,4 @@ openjdk             8-jdk-alpine        792ff45a2a17        12 days ago         
 nginx               alpine              b411e34b4606        2 weeks ago         16.1MB
 00. É possivel notar que foi feito o download da imagem do nginx e também criado o imagem do creditlimit-ui (frontend);
 00. Após os passos anteriores terem rodado com sucesso, é necessário rodar imagem do creditlimit-ui (frontend);
-docker run -p 80:80 --rm creditlimit-ui
+docker run -p 80:80 --net bridge --rm creditlimit-ui
