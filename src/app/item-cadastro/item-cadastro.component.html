@@ -1,0 +1,47 @@
+<form #frm="ngForm" (ngSubmit)="add(frm)">
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <h1>Limite de Crédito</h1>
+        </div>
+
+        <div class="ui-g-12 ui-fluid>">
+            <label>Nome Cliente</label><br/>            
+            <input pInputText name="customerName" ngModel [required]="true" />
+        </div>
+
+        <div class="ui-g-6 ui-fluid>">
+            <label>Limite de crédito</label><br />
+            <input pInputText name="creditLimitAmount" ngModel [required]="true" (keypress)="numberOnly($event)" />
+        </div>
+
+        <div class="ui-g-6 ui-fluid>">
+            <label>Risco</label><br />
+            <p-dropdown [options]="risks" name="risk" [(ngModel)]="selectedRisk" [required]="true">                
+            </p-dropdown>
+        </div>
+
+        <div class="ui-g-12 float-right">
+            <button pButton type="submit" label="Adicionar" [disabled]="frm.invalid">                
+            </button>
+        </div>
+    </div>    
+</form>
+<div class="ui-g">
+    <div class="ui-g-12">
+    <p-dataTable [value]="itens">
+        <p-column field="id" header="Código"></p-column>
+        <p-column field="customerName" header="Nome Cliente"></p-column>
+        <p-column header="Limite de crédito">
+            <ng-template pTemplate="body" let-item="rowData">
+                {{item.creditLimitAmount | currency:'BRL':true:'1.2-2'}}
+            </ng-template>
+        </p-column>
+        <p-column field="risk" header="Risco"></p-column>
+        <p-column header="Taxa de juros">
+            <ng-template pTemplate="body" let-item="rowData">
+                {{item.fees | percent:'2.1-2'}}
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+    </div>
+</div>
